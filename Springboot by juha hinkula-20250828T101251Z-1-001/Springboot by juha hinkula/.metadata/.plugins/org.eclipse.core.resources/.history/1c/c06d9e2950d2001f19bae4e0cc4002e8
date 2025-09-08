@@ -1,0 +1,45 @@
+package com.example.Cardatabase;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.example.Cardatabase.domain.Car;
+import com.example.Cardatabase.domain.CarRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@SpringBootApplication
+public class CardatabaseApplication implements CommandLineRunner {
+	private static final Logger logger = LoggerFactory.getLogger(CardatabaseApplication.class);
+	
+	private final CarRepository repository;
+	
+	// constructor injection to access the database 
+	public CardatabaseApplication(CarRepository repository) {
+		this.repository = repository;
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(CardatabaseApplication.class, args);
+		logger.info("Application Started");
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		repository.save(new Car("Ford","Mustang","Red","ADF-11241",2024,1751827));
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
